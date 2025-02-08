@@ -470,7 +470,7 @@ arrange_col_canonical.epi_df <- function(x, ...) {
 #' @export
 group_epi_df <- function(x, exclude = character()) {
   cols <- key_colnames(x, exclude = exclude)
-  x %>% group_by(across(all_of(cols)))
+  reclass(grouped_df(x, cols), attr(x, "metadata"))
 }
 
 #' Aggregate an `epi_df` object
