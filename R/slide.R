@@ -309,7 +309,9 @@ epi_slide <- function(
     ...,
     .keep = TRUE
   ) %>%
-    {vec_rbind(!!!.)} %>%
+    {
+      vec_rbind(!!!.)
+    } %>%
     `[`(.$.real, names(.) != ".real") %>%
     arrange_col_canonical() %>%
     group_by(!!!.x_orig_groups)
@@ -345,13 +347,14 @@ epi_slide_one_group <- function(
     .data_group, # (epi_df; epi_slide uses .keep = TRUE)
     vec_cbind( # (tibble -> vec_rbind produces tibble)
       .group_key,
-      tibble(
+      new_tibble(vec_recycle_common(
         time_value = c(
           missing_times,
           .date_seq_list$pad_early_dates,
           .date_seq_list$pad_late_dates
-        ), .real = FALSE
-      )
+        ),
+        .real = FALSE
+      ))
     )
     # we should be adding time values of the same time_type (and shouldn't be
     # introducing duplicate epikeytime values); we can reclass without checks:
@@ -902,7 +905,10 @@ epi_slide_opt <- function(
     # first `before` and last `after` elements.
     .data_group <- vec_rbind(
       .data_group, # (tibble; epi_slide_opt uses .keep = FALSE)
-      tibble(time_value = c(missing_times, pad_early_dates, pad_late_dates), .real = FALSE)
+      new_tibble(vec_recycle_common(
+        time_value = c(missing_times, pad_early_dates, pad_late_dates),
+        .real = FALSE
+      ))
     ) %>%
       `[`(vec_order(.$time_value), )
 
