@@ -29,6 +29,7 @@
 #' @importFrom tools toTitleCase
 #' @importFrom vctrs vec_data
 #' @importFrom vctrs vec_equal
+#' @importFrom vctrs vec_order
 #' @importFrom vctrs vec_sort
 ## usethis namespace: end
 NULL

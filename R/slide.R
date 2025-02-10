@@ -354,7 +354,7 @@ epi_slide_one_group <- function(
       )
     )
   ) %>%
-    arrange(.data$time_value)
+    `[`(vec_order(.$time_value), )
 
   # If the data group does not contain any of the reference time values, return
   # the original .data_group without slide columns and let bind_rows at the end
@@ -902,7 +902,7 @@ epi_slide_opt <- function(
       .data_group,
       tibble(time_value = c(missing_times, pad_early_dates, pad_late_dates), .real = FALSE)
     ) %>%
-      arrange(.data$time_value)
+      `[`(vec_order(.$time_value), )
 
     if (f_from_package == "data.table") {
       # Grouping should ensure that we don't have duplicate time values.
