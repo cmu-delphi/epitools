@@ -962,7 +962,8 @@ epi_slide_opt <- function(
     return(.data_group)
   }
 
-  result <- mutate(.x, .real = TRUE) %>%
+  result <- .x %>%
+    `[[<-`(".real", value = TRUE) %>%
     group_modify(slide_one_grp, ..., .keep = FALSE) %>%
     `[`(.$.real, names(.) != ".real") %>%
     arrange_col_canonical() %>%
