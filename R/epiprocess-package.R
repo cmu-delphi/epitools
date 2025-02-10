@@ -20,6 +20,7 @@
 #' @importFrom data.table key
 #' @importFrom data.table setkeyv
 #' @importFrom dplyr arrange
+#' @importFrom dplyr grouped_df
 #' @importFrom dplyr is_grouped_df
 #' @importFrom dplyr select
 #' @importFrom lifecycle deprecated
